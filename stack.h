@@ -5,11 +5,11 @@
 class Stack {
  public:
   Stack();
+  Stack(Node* nTop);
   ~Stack();
-  Node* getTop();
   void push(Node* nTop);
   Node* pop();
-  
+  Node* peek();
  private:
   Node* top;
 };

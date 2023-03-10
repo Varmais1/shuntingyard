@@ -4,12 +4,12 @@ Stack::Stack() {
   top = NULL;
 }
 
+Stack::Stack(Node* nTop) { 
+  top = nTop;
+}
+  
 Stack::~Stack() {
   delete top;
-}
-
-Node* Stack::getTop() {
-  return top;
 }
 
 void Stack::push(Node* nTop) {
@@ -20,5 +20,10 @@ void Stack::push(Node* nTop) {
 
 Node* Stack::pop() {
   Node* temp = top;
-  
+  top = top->getLeft();
+  return temp;
+}
+
+Node* Stack::peek() {
+  return top;
 }
