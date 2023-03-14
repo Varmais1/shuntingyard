@@ -1,17 +1,36 @@
 #include <iostream>
 #include <cstring>
 #include "node.h"
+#include "stack.h"
+#include "queue.h"
 
 using namespace std;
 
 void singlelowercase(char sentence[]);
-
+void removeSpaces(char sentence[]);
 
 int main() {
   char command[10];
+  char expression[500];
+  Node* root;
+  Stack ops;
+  Queue output;
+
   
   while(true) {
-    break;
+    cout << "Type in infix, prefix, or postfix, or quit." << endl;
+    cin >> command;
+    cin.ignore();
+    if(strcmp(command,"quit") == 0) {
+      break;
+    }
+    cout << "Type in an expression in infix notation." << endl;
+    cin.get(expression, 500);
+    cin.ignore();
+    if(strcmp(command, "infix") == 0) {
+      
+      cout << endl;
+    }
   }
   return 0;
 }
@@ -34,4 +53,21 @@ void singlelowercase(char sentence[]) {
      //increment the variable
      i++;
    }
+}
+
+void removeSpaces(char sentence[]) {
+  int i = 0;
+  int j = 0;
+  while(true) {
+    if(sentence[i] != ' ') {
+      i++;
+    }
+    else if(sentence[i] == '\0') {
+      sentence[j] == '\0';
+      break;
+    }
+    else {
+      sentence[j] = sentence[i];
+    }
+  }
 }

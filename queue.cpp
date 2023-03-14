@@ -13,8 +13,8 @@ Queue::Queue(Node* nEnd, Node* nBeginning) {
 }
 
 void Queue::enqueue(Node* nBeginning) {
-  beginning->setLeft(nBeginning);
-  nBeginning->setRight(beginning);
+  beginning->setPrevious(nBeginning);
+  nBeginning->setNext(beginning);
   beginning = nBeginning;
 }
 
@@ -30,4 +30,9 @@ Node* Queue::getBeginning() {
 
 Node* Queue::getEnd() {
   return end;
+}
+
+Queue::~Queue() {
+  delete beginning;
+  delete end;
 }
