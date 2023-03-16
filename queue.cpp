@@ -13,14 +13,18 @@ Queue::Queue(Node* nEnd, Node* nBeginning) {
 }
 
 void Queue::enqueue(Node* nBeginning) {
-  beginning->setPrevious(nBeginning);
-  nBeginning->setNext(beginning);
+  if(beginning!=NULL) {
+    beginning->setPrevious(nBeginning);
+    nBeginning->setNext(beginning);
+  }
   beginning = nBeginning;
 }
 
 Node* Queue::dequeue() {
   Node* temp = end;
-  end = end->getLeft();
+  if(end != NULL) {
+    end = end->getLeft();
+  }
   return temp;
 }
 

@@ -27,6 +27,40 @@ int main() {
     cout << "Type in an expression in infix notation." << endl;
     cin.get(expression, 500);
     cin.ignore();
+    int itr = 0;
+    while(expression[itr] != '\0') {
+      Node* part = new Node(expression[itr]);
+      if(isdigit(part->getData())) {
+	output.enqueue(part);
+	itr++;
+	continue;
+      }
+      else if(part->getData() == '+' || part->getData() == '-' || part->getData() == '*' || part->getData() == '/' || part->getData() == '^') {
+	bool carat = expression[itr] == '^';
+	while(ops.peek() != NULL && ops.peek()->getData() != '(' && (part->getPrecedence() < ops.peek()->getPrecedence() || part->getPrecedence() == ops.peek()->getPrecedence() && carat == false)) {
+	  output.enqueue(ops.pop());
+	  ops.push(part);
+	}
+      }
+      else if(part->getData() == '(') {
+	ops.push(part);
+      }
+      else if(part->getData() == ')') {
+	if(ops.peek() != NULL) {
+	  while(ops.peek()->getData() != '(' && ops.peek() != NULL) {
+	    output.enqueue(ops.pop());
+	  }
+	  if(ops.peek()->getData() == '(') {
+	    Node* temp = ops.pop();
+	    delete temp;
+	  }
+	}
+      }
+      
+    }
+    while(ops.peek() != NULL) {
+      output.enqueue(ops.pop());
+    }
     if(strcmp(command, "infix") == 0) {
       
       cout << endl;
