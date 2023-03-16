@@ -15,7 +15,7 @@ int main() {
   Node* root;
   Stack ops;
   Queue output;
-
+  Stack tree;
   
   while(true) {
     cout << "Type in infix, prefix, or postfix, or quit." << endl;
@@ -61,6 +61,21 @@ int main() {
     while(ops.peek() != NULL) {
       output.enqueue(ops.pop());
     }
+    while(output.getBeginning() != NULL) {
+      Node* temp = output.dequeue();
+      if(isdigit(temp->getData())) {
+	tree.push(temp);
+	continue;
+      }
+
+      Node* right = tree.pop();
+      Node* left = tree.pop();
+      tree.push(temp);
+      temp->setRight(right);
+      temp->setLeft(left);
+    }
+    root = tree.pop();
+    
     if(strcmp(command, "infix") == 0) {
       
       cout << endl;
