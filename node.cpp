@@ -26,7 +26,7 @@ Node::Node(char nData) {
 
 char Node::getData() {
   return data;
-ou}
+}
 
 Node* Node::getLeft() {
   return left;
@@ -81,7 +81,16 @@ int Node::getPrecedence() {
 }
 
 Node::~Node() {
-  delete left;
-  delete right;
-  delete next;
+  if(left != NULL) {
+    delete left;
+  }
+  if(right != NULL) {
+    delete right;
+  }
+  if(next != NULL) {
+    delete next;
+  }
+  if(previous != NULL) {
+    delete previous;
+  }
 }

@@ -21,11 +21,12 @@ void Queue::enqueue(Node* nBeginning) {
 }
 
 Node* Queue::dequeue() {
-  Node* temp = end;
   if(end != NULL) {
+    Node* temp = end;
     end = end->getPrevious();
+    return temp;
   }
-  return temp;
+  return NULL;
 }
 
 Node* Queue::getBeginning() {

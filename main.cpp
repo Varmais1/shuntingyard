@@ -23,7 +23,7 @@ int main() {
     cin >> command;
     cin.ignore();
     if(strcmp(command,"quit") == 0) {
-      break;
+      return 0;
     }
     cout << "Type in an expression in infix notation." << endl;
     cin.get(expression, 500);
@@ -46,6 +46,9 @@ int main() {
 	  output.enqueue(ops.pop());
 	  ops.push(part);
 	}
+	if(ops.peek() == NULL) {
+	  ops.push(part);
+	}
       }
       else if(part->getData() == '(') {
 	ops.push(part);
@@ -66,16 +69,18 @@ int main() {
       }
       itr++;
     }
+    cout << "reached." << endl;
     while(ops.peek() != NULL) {
       output.enqueue(ops.pop());
     }
-    while(output.getBeginning() != NULL) {
+    //cout << "reached 2." << endl;
+    while(output.getEnd() != NULL) {
       Node* temp = output.dequeue();
+      //cout << "temp: " << temp;
       if(isdigit(temp->getData())) {
 	tree.push(temp);
 	continue;
       }
-
       Node* right = tree.pop();
       Node* left = tree.pop();
       tree.push(temp);
@@ -95,9 +100,6 @@ int main() {
     else if(strcmp(command, "prefix") == 0) {
       prefix(root);
       cout << endl;
-    }
-    else if(strcmp(command, "quit")) {
-      break;
     }
     else {
       cout << "Please enter a valid command." << endl;
