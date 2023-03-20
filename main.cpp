@@ -3,6 +3,7 @@
 #include "node.h"
 #include "stack.h"
 #include "queue.h"
+#include "tree.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ int main() {
   Stack tree;
   
   while(true) {
-    cout << "Type in infix, prefix, or postfix, or quit." << endl;
+    cout << "Type in infix, prefix, postfix, or quit." << endl;
     cin >> command;
     cin.ignore();
     if(strcmp(command,"quit") == 0) {
@@ -27,11 +28,15 @@ int main() {
     cout << "Type in an expression in infix notation." << endl;
     cin.get(expression, 500);
     cin.ignore();
+    removeSpaces(expression);
     int itr = 0;
     while(expression[itr] != '\0') {
       Node* part = new Node(expression[itr]);
       if(isdigit(part->getData())) {
 	output.enqueue(part);
+	if(itr == 0) {
+	  output.setEnd(part);
+	}
 	itr++;
 	continue;
       }
@@ -56,7 +61,10 @@ int main() {
 	  }
 	}
       }
-      
+      if(itr == 0) {
+	output.setEnd(part);
+      }
+      itr++;
     }
     while(ops.peek() != NULL) {
       output.enqueue(ops.pop());
@@ -77,8 +85,22 @@ int main() {
     root = tree.pop();
     
     if(strcmp(command, "infix") == 0) {
-      
+      infix(root);
       cout << endl;
+    }
+    else if(strcmp(command, "postfix") ==0) {
+      postfix(root);
+      cout << endl;
+    }
+    else if(strcmp(command, "prefix") == 0) {
+      prefix(root);
+      cout << endl;
+    }
+    else if(strcmp(command, "quit")) {
+      break;
+    }
+    else {
+      cout << "Please enter a valid command." << endl;
     }
   }
   return 0;
@@ -108,7 +130,7 @@ void removeSpaces(char sentence[]) {
   int i = 0;
   int j = 0;
   while(true) {
-    if(sentence[i] != ' ') {
+    if((int)sentence[i] == 32) {
       i++;
     }
     else if(sentence[i] == '\0') {
@@ -117,6 +139,8 @@ void removeSpaces(char sentence[]) {
     }
     else {
       sentence[j] = sentence[i];
+      i++;
+      j++;
     }
   }
 }

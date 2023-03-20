@@ -26,7 +26,7 @@ Node::Node(char nData) {
 
 char Node::getData() {
   return data;
-}
+ou}
 
 Node* Node::getLeft() {
   return left;

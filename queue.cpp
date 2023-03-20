@@ -23,7 +23,7 @@ void Queue::enqueue(Node* nBeginning) {
 Node* Queue::dequeue() {
   Node* temp = end;
   if(end != NULL) {
-    end = end->getLeft();
+    end = end->getPrevious();
   }
   return temp;
 }
@@ -34,6 +34,14 @@ Node* Queue::getBeginning() {
 
 Node* Queue::getEnd() {
   return end;
+}
+
+void Queue::setEnd(Node* nEnd) {
+  end = nEnd;
+}
+
+void Queue::setBeginning(Node* nBeginning) {
+  beginning = nBeginning;
 }
 
 Queue::~Queue() {

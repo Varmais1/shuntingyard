@@ -13,8 +13,8 @@ Stack::~Stack() {
 }
 
 void Stack::push(Node* nTop) {
-  top->setNext(nTop);
-  nTop->setPrevious(top);
+  top->setPrevious(nTop);
+  nTop->setNext(top);
   top = nTop;
 }
 
