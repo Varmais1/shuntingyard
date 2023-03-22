@@ -1,5 +1,6 @@
 #include "node.h"
 
+//constructors
 Node::Node() {
   data = '0';
   left = NULL;
@@ -24,6 +25,7 @@ Node::Node(char nData) {
   previous = NULL;
 }
 
+//getters and setters
 char Node::getData() {
   return data;
 }
@@ -64,6 +66,7 @@ Node* Node::getPrevious() {
   return previous;
 }
 
+//gives the precedence of an operator
 int Node::getPrecedence() {
   if(data == '(') {
     return 5;
@@ -80,17 +83,11 @@ int Node::getPrecedence() {
   return 0;
 }
 
-Node::~Node() {
+/*Node::~Node() {
   if(left != NULL) {
-    delete left;
+    left = NULL;
   }
   if(right != NULL) {
-    delete right;
+    right = NULL
   }
-  if(next != NULL) {
-    delete next;
-  }
-  if(previous != NULL) {
-    delete previous;
-  }
-}
+}*/
